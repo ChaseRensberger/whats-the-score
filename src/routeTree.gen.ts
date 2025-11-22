@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as F1ScheduleYearRouteImport } from './routes/f1/schedule/$year'
+import { Route as F1ResultsMeetingIdRouteImport } from './routes/f1/results/$meetingId'
 
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
@@ -28,34 +29,48 @@ const F1ScheduleYearRoute = F1ScheduleYearRouteImport.update({
   path: '/f1/schedule/$year',
   getParentRoute: () => rootRouteImport,
 } as any)
+const F1ResultsMeetingIdRoute = F1ResultsMeetingIdRouteImport.update({
+  id: '/f1/results/$meetingId',
+  path: '/f1/results/$meetingId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/f1/results/$meetingId': typeof F1ResultsMeetingIdRoute
   '/f1/schedule/$year': typeof F1ScheduleYearRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/f1/results/$meetingId': typeof F1ResultsMeetingIdRoute
   '/f1/schedule/$year': typeof F1ScheduleYearRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/f1/results/$meetingId': typeof F1ResultsMeetingIdRoute
   '/f1/schedule/$year': typeof F1ScheduleYearRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/f1/schedule/$year'
+  fullPaths: '/' | '/about' | '/f1/results/$meetingId' | '/f1/schedule/$year'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/f1/schedule/$year'
-  id: '__root__' | '/' | '/about' | '/f1/schedule/$year'
+  to: '/' | '/about' | '/f1/results/$meetingId' | '/f1/schedule/$year'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/f1/results/$meetingId'
+    | '/f1/schedule/$year'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  F1ResultsMeetingIdRoute: typeof F1ResultsMeetingIdRoute
   F1ScheduleYearRoute: typeof F1ScheduleYearRoute
 }
 
@@ -82,12 +97,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof F1ScheduleYearRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/f1/results/$meetingId': {
+      id: '/f1/results/$meetingId'
+      path: '/f1/results/$meetingId'
+      fullPath: '/f1/results/$meetingId'
+      preLoaderRoute: typeof F1ResultsMeetingIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  F1ResultsMeetingIdRoute: F1ResultsMeetingIdRoute,
   F1ScheduleYearRoute: F1ScheduleYearRoute,
 }
 export const routeTree = rootRouteImport

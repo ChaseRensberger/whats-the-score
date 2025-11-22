@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import {
 	fetchSchedule,
@@ -36,7 +36,7 @@ function RouteComponent() {
 		}
 
 		loadSchedule()
-	}, [])
+	}, [year])
 
 	return (
 		<>
@@ -82,7 +82,9 @@ function ScheduleListItem({ round, meeting }: ScheduleListItemProps) {
 				<span>{meeting.circuit_short_name}</span>
 			</span>
 			<span className="text-left text-xs text-gray-500">{formatDateRange(meeting.date_start)}</span>
-			<button className="text-blue-400">View Round</button>
+			<Link to="/f1/results/$meetingId" params={{ meetingId: String(meeting.meeting_key) }} className="text-blue-400 hover:text-blue-300">
+				View Round
+			</Link>
 		</>
 	)
 }
