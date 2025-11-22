@@ -1,4 +1,4 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
+import { createRootRoute, Outlet } from '@tanstack/react-router'
 
 const RootLayout = () => (
 	<main className='min-h-screen bg-black text-white p-8 flex flex-col items-center space-y-4'>

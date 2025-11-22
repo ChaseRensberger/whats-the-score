@@ -12,7 +12,7 @@ export const Route = createFileRoute('/f1/schedule/$year')({
 	component: RouteComponent,
 })
 
-function RouteComponent({ params }: any) {
+function RouteComponent() {
 	const { year } = Route.useParams()
 
 	const [meetings, setMeetings] = useState<Meeting[]>([])
